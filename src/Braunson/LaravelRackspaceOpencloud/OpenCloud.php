@@ -14,6 +14,8 @@ class OpenCloud extends \OpenCloud\Rackspace{
 	function __construct(){
 
 		$this->region = Config::get('laravel-rackspace-opencloud::region');
+        	$this->urlType = Config::get('laravel-rackspace-opencloud::urlType');
+        	
 		$authUrl = ($this->region == 'LON') ? 'https://lon.identity.api.rackspacecloud.com/v2.0/' : 'https://identity.api.rackspacecloud.com/v2.0/';
 
 		parent::__construct($authUrl, array(
