@@ -18,10 +18,7 @@
         , "alchemy/zippy": "0.1.0"
     }
     , "autoload": {
-        "classmap": [
-            "src/migrations"
-        ]
-        , "psr-0": {
+          "psr-0": {
             "Braunson\\LaravelRackspaceOpencloud": "src/"
         }
     }
