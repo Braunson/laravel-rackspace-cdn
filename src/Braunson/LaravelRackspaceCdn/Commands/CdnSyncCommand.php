@@ -1,4 +1,4 @@
-<?php namespace Braunson\LaravelRackspaceOpencloud\Commands;
+<?php namespace Braunson\LaravelRackspaceCdn\Commands;
 
 use \File;
 use \Str;

@@ -1,4 +1,4 @@
-<?php namespace Braunson\LaravelRackspaceOpencloud;
+<?php namespace Braunson\LaravelRackspaceCdn;
 
 use \Config;
 use \File;
@@ -13,14 +13,14 @@ class OpenCloud extends \OpenCloud\Rackspace{
 
 	function __construct(){
 
-		$this->region = Config::get('laravel-rackspace-opencloud::region');
-        	$this->urlType = Config::get('laravel-rackspace-opencloud::urlType');
+		$this->region = Config::get('laravel-rackspace-cdn::region');
+        $this->urlType = Config::get('laravel-rackspace-cdn::urlType');
         	
 		$authUrl = ($this->region == 'LON') ? 'https://lon.identity.api.rackspacecloud.com/v2.0/' : 'https://identity.api.rackspacecloud.com/v2.0/';
 
 		parent::__construct($authUrl, array(
-			'username' => Config::get('laravel-rackspace-opencloud::username'),
-			'apiKey' => Config::get('laravel-rackspace-opencloud::apiKey')
+			'username' => Config::get('laravel-rackspace-cdn::username'),
+			'apiKey' => Config::get('laravel-rackspace-cdn::apiKey')
 		));
 	}
 

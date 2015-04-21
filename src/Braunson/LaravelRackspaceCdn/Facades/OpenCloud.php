@@ -1,4 +1,4 @@
-<?php namespace Thomaswelton\LaravelRackspaceOpencloud\Facades;
+<?php namespace Braunson\LaravelRackspaceCdn\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

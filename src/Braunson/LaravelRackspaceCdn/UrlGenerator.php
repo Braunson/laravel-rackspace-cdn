@@ -1,10 +1,10 @@
-<?php namespace Thomaswelton\LaravelRackspaceOpencloud;
+<?php namespace Braunson\LaravelRackspaceCdn;
 
 use \File;
 use \Request;
 use Illuminate\Routing\UrlGenerator as LaravelGenerator;
 
-class UrlGenerator extends LaravelGenerator{
+class UrlGenerator extends LaravelGenerator {
 
 	/**
      * Generate a URL to an application asset.

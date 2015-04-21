@@ -22,7 +22,7 @@
             "src/migrations"
         ]
         , "psr-0": {
-            "Braunson\\LaravelRackspaceOpencloud": "src/"
+            "Braunson\\LaravelRackspaceCdn": "src/"
         }
     }
     , "minimum-stability": "dev"

@@ -1,9 +1,9 @@
-<?php namespace Braunson\LaravelRackspaceOpencloud;
+<?php namespace Braunson\LaravelRackspaceCdn;
 
 use Illuminate\Support\ServiceProvider;
-use Braunson\LaravelRackspaceOpencloud\Commands;
+use Braunson\LaravelRackspaceCdn\Commands;
 
-class LaravelRackspaceOpencloudServiceProvider extends ServiceProvider {
+class LaravelRackspaceCdnServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -19,7 +19,7 @@ class LaravelRackspaceOpencloudServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('braunson/laravel-rackspace-opencloud');
+		$this->package('braunson/laravel-rackspace-cdn');
 	}
 
 	/**
