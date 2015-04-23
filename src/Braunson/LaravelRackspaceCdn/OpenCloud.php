@@ -56,7 +56,7 @@ class OpenCloud extends \OpenCloud\Rackspace{
 			return $this->createDataObject($container, $file, $name);
 
 		}else{
-			throw new Exception("OpenCloud::upload file not found", 1);
+			throw new \Exception("OpenCloud::upload file not found", 1);
 		}
 	}
 
