@@ -7,7 +7,7 @@ use Alchemy\Zippy\Zippy;
 // 5 minutes
 define('RAXSDK_TIMEOUT', 300);
 
-class OpenCloud extends \OpenCloud\Rackspace{
+class OpenCloud extends \OpenCloud\Rackspace {
 
 	public $region = null;
 
@@ -25,39 +25,54 @@ class OpenCloud extends \OpenCloud\Rackspace{
 	}
 
 	public function getObjectStore(){
-		return $this->ObjectStore('cloudFiles', $this->region, $this->urlType);
+        return $this->objectStoreService('cloudFiles', $this->region, $this->urlType);
 	}
 
 	public function getContainer($name){
 		// create a new container
-		$container = $this->getObjectStore()->Container();
-		$container->Create(array('name' => $name ));
-
-		// publish it to the CDN with 1 year TTL
+        $container = $this->getObjectStore()->getContainer($name);
+        
+        // Get the CDN
+        $cdnContainer = $container->getCdn();
+        
+		// Publish it to the CDN with 1 year TTL
 		$ttl = 60 * 60 * 24 * 365;
-		$container->PublishToCDN($ttl);
+        $cdnContainer->setTtl($ttl); 
 
 		return $container;
 	}
 
 	public function upload($container, $file, $name = null)
 	{
+        if( $file ) {
+            
+            return $this->getContainer($container)->uploadObject($name, $file);
+            
+        } else {
+            
+			throw new \Exception("OpenCloud::upload file not found", 1);
+            
+        }
+        
+        /*
 		if(is_object($file) && get_class($file) == 'Symfony\Component\HttpFoundation\File\UploadedFile'){
+		  
 			// Passed with was a file upload from a form. Used the PHP tmp name
 			// and guess an extension
 			if(is_null($name)){
 				$name = basename($file) . '.' . $file->guessExtension();
 			}
-
-			return $this->createDataObject($container, $file->getRealPath(), $name);
+            
+            return $this->getContainer($container)->uploadObject($name, $file->getRealPath());
 
 		}else if(File::isFile($file)){
+		  
 			// Passed file was a string to the file path
-			return $this->createDataObject($container, $file, $name);
+            return $this->getContainer($container)->uploadObject($name, $file);
 
 		}else{
 			throw new \Exception("OpenCloud::upload file not found", 1);
-		}
+		}*/
 	}
 
     // Create and archive and upload a whole directory
@@ -110,7 +125,7 @@ class OpenCloud extends \OpenCloud\Rackspace{
 		return $object;
 	}
   
-  public function delete($container, $file){
+  public function deleteTEMP($container, $file){
       $container = $this->getContainer($container);
       //if file is fed with full url, shorten to last component
         $file = explode('/',$file);
@@ -122,4 +137,3 @@ class OpenCloud extends \OpenCloud\Rackspace{
       }
   }
 }
-
