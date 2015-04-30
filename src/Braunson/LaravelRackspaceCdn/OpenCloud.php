@@ -54,6 +54,7 @@ class OpenCloud extends \OpenCloud\Rackspace {
     /**
      * Return objects from the cloud in a specified container
      */
+    public function getFile( $container, $filename )
     {
         return $this->getContainer( $container )->getObject( $filename );
     }
