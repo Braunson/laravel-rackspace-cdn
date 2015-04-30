@@ -11,6 +11,9 @@ class OpenCloud extends \OpenCloud\Rackspace {
 
 	public $region = null;
 
+    /**
+     * Construct our class
+     */
 	function __construct(){
 
 		$this->region = Config::get('laravel-rackspace-cdn::region');
@@ -24,10 +27,16 @@ class OpenCloud extends \OpenCloud\Rackspace {
 		));
 	}
 
+    /**
+     * Get the object store variable
+     */
 	public function getObjectStore(){
         return $this->objectStoreService('cloudFiles', $this->region, $this->urlType);
 	}
 
+    /**
+     * Get/set our container
+     */
 	public function getContainer($name){
 		// create a new container
         $container = $this->getObjectStore()->getContainer($name);
@@ -41,7 +50,17 @@ class OpenCloud extends \OpenCloud\Rackspace {
 
 		return $container;
 	}
+    
+    /**
+     * Return objects from the cloud in a specified container
+     */
+    {
+        return $this->getContainer( $container )->getObject( $filename );
+    }
 
+    /**
+     * Upload files to a set container
+     */
 	public function upload($container, $file, $name = null)
 	{
         if( $file ) {
