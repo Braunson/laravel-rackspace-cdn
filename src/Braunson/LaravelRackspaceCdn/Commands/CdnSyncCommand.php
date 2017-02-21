@@ -41,7 +41,7 @@ class CdnSyncCommand extends Command {
 	public function fire()
     {
         $opencloud = \App::make('open-cloud');
-        $container_name = \Config::get('laravel-rackspace-opencloud::container');
+        $container_name = \Config::get('laravel-rackspace-cdn::container');
         $container = $opencloud->getContainer($container_name);
 
         // Get directory or file path
