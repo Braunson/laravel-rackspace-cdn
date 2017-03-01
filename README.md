@@ -7,16 +7,16 @@ Update your `composer.json` file to include this package as a dependency
 
 Register the OpenCloud service provider by adding it to the providers array in your `app/config/app.php` file.
 ```php
-'providers' => array(
+'providers' => [
 	Braunson\LaravelRackspaceOpencloud\LaravelRackspaceOpencloudServiceProvider
-)
+]
 ```
 
 Alias the OpenCloud facade by adding it to the aliases array in the `app/config/app.php` file.
 ```php
-'aliases' => array(
+'aliases' => [
 	'OpenCloud' => 'Braunson\LaravelRackspaceOpencloud\Facades\OpenCloud'
-)
+]
 ```
 
 ## Configuration
