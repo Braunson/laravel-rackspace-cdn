@@ -1,39 +1,39 @@
 {
-  "name": "braunson/laravel-rackspace-cdn"
-  , "description": "Updated version of ThomasWelton's because that repo seems to be inactive"
-  , "authors": [
-    {
-      "name": "Braunson Yager"
-      , "email": "braunson@geekybeaver.ca"
+    "name": "braunson/laravel-rackspace-cdn",
+    "description": "Updated version of ThomasWelton's because that repo seems to be inactive",
+    "authors": [
+        {
+            "name": "Braunson Yager",
+            "email": "braunson@geekybeaver.ca"
+        },
+        {
+            "name": "ThomasWelton",
+            "email": "thomaswelton@me.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0", 
+        "illuminate/support": "4.x", 
+        "rackspace/php-opencloud": "1.13.*", 
+        "alchemy/zippy": "0.1.0"
     },
-    {
-      "name": "ThomasWelton"
-      , "email": "thomaswelton@me.com"
-    }
-  ]
-  , "require": {
-    "php": ">=5.3.0"
-    , "illuminate/support": "4.x"
-    , "rackspace/php-opencloud": "1.13.*"
-    , "alchemy/zippy": "0.1.0"
-  }
-  , "autoload": {
-    "classmap": [
-      "src/migrations"
-    ]
-    , "psr-0": {
-      "Braunson\\LaravelRackspaceCdn": "src/"
-    }
-  }
-  , "minimum-stability": "dev",
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Braunson\\LaravelRackspaceOpencloud\\LaravelRackspaceOpencloudServiceProvider"
-      ],
-      "aliases": {
-        "Opencloud": "Braunson\\LaravelRackspaceOpencloud\\Facades\\OpenCloud"
-      }
-   }
- } 
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ], 
+        "psr-0": {
+            "Braunson\\LaravelRackspaceCdn": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Braunson\\LaravelRackspaceOpencloud\\LaravelRackspaceOpencloudServiceProvider"
+            ],
+            "aliases": {
+                "Opencloud": "Braunson\\LaravelRackspaceOpencloud\\Facades\\OpenCloud"
+            }
+        }
+    } 
 }
