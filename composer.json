@@ -29,10 +29,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Braunson\\LaravelRackspaceOpencloud\\LaravelRackspaceOpencloudServiceProvider"
+                "Braunson\\LaravelRackspaceCdn\\LaravelRackspaceCdnServiceProvider"
             ],
             "aliases": {
-                "Opencloud": "Braunson\\LaravelRackspaceOpencloud\\Facades\\OpenCloud"
+                "OpenCloud": "Braunson\\LaravelRackspaceCdn\\Facades\\OpenCloud"
             }
         }
     } 
