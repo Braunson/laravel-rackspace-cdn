@@ -33,6 +33,19 @@ class CdnSyncCommand extends Command {
 		parent::__construct();
 	}
 
+    /**
+     * Execute the console command (Laravel 5.0+).
+     *
+     * @author Artem Molotov https://github.com/ArtemMolotov
+     * @datetime 12.10.2017 13:10
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        $this->fire();
+    }
+
 	/**
 	 * Execute the console command.
 	 *
