@@ -3,6 +3,7 @@
 use \Config;
 use \File;
 use Alchemy\Zippy\Zippy;
+use Braunson\LaravelRackspaceCdn\ConfigExt;
 
 // 5 minutes
 define('RAXSDK_TIMEOUT', 300);
@@ -16,14 +17,16 @@ class OpenCloud extends \OpenCloud\Rackspace {
      */
 	function __construct(){
 
-		$this->region = Config::get('laravel-rackspace-cdn::region');
-        $this->urlType = Config::get('laravel-rackspace-cdn::urlType');
+		$this->region = ConfigExt::getFrom('laravel-rackspace-cdn', 'region');
+        $this->urlType = ConfigExt::getFrom('laravel-rackspace-cdn', 'urlType');
         	
-		$authUrl = ($this->region == 'LON') ? 'https://lon.identity.api.rackspacecloud.com/v2.0/' : 'https://identity.api.rackspacecloud.com/v2.0/';
+		$authUrl = ($this->region == 'LON')
+            ? 'https://lon.identity.api.rackspacecloud.com/v2.0/'
+            : 'https://identity.api.rackspacecloud.com/v2.0/';
 
 		parent::__construct($authUrl, array(
-			'username' => Config::get('laravel-rackspace-cdn::username'),
-			'apiKey' => Config::get('laravel-rackspace-cdn::apiKey')
+			'username' => ConfigExt::getFrom('laravel-rackspace-cdn', 'username'),
+			'apiKey' => ConfigExt::getFrom('laravel-rackspace-cdn', 'apiKey')
 		));
 	}
 
