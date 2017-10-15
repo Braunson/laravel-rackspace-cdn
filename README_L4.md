@@ -10,7 +10,7 @@ Update your `composer.json` file to include this package as a dependency
 Register the OpenCloud service provider by adding it to the providers array in your `app/config/app.php` file.
 ```php
 'providers' => [
-	Braunson\LaravelRackspaceCdn\LaravelRackspaceCdnServiceProvider
+	'Braunson\LaravelRackspaceCdn\LaravelRackspaceCdnServiceProvider'
 ]
 ```
 
