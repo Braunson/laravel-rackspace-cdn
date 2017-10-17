@@ -7,7 +7,7 @@ Run command in your terminal to include this package as a dependency:
 composer require braunson/laravel-rackspace-opencloud
 ```
 
-Register the OpenCloud service provider and alias the OpenCloud facade by adding it to the providers and aliases arrays in the `config/app.php` file.
+Register the OpenCloud service provider and alias the OpenCloud, Str (removed in Laravel 5.0+) facades by adding it to the providers and aliases arrays in the `config/app.php` file.
 
 For Laravel 5.5 and later **don't need** (auto discovery).
 
@@ -21,7 +21,8 @@ For Laravel 5.2 - 5.4:
 
 ```php
 'aliases' => [
-    'OpenCloud' => Braunson\LaravelRackspaceCdn\Facades\OpenCloud::class
+    'OpenCloud' => Braunson\LaravelRackspaceCdn\Facades\OpenCloud::class,
+    'Str' => Illuminate\Support\Str::class,
 ]
 ```
 
@@ -35,7 +36,8 @@ For Laravel 5.1 and earlier:
 
 ```php
 'aliases' => [
-    'OpenCloud' => 'Braunson\LaravelRackspaceCdn\Facades\OpenCloud'
+    'OpenCloud' => 'Braunson\LaravelRackspaceCdn\Facades\OpenCloud',
+    'Str' => 'Illuminate\Support\Str',
 ]
 ```
 

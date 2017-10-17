@@ -32,7 +32,8 @@
                 "Braunson\\LaravelRackspaceCdn\\LaravelRackspaceCdnServiceProvider"
             ],
             "aliases": {
-                "OpenCloud": "Braunson\\LaravelRackspaceCdn\\Facades\\OpenCloud"
+                "OpenCloud": "Braunson\\LaravelRackspaceCdn\\Facades\\OpenCloud",
+                "Str": "Illuminate\\Support\\Str"
             }
         }
     }
