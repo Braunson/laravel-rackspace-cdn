@@ -2,6 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 use Braunson\LaravelRackspaceCdn\Commands;
+use Braunson\LaravelRackspaceCdn\LaravelVersion as Version;
+use Braunson\LaravelRackspaceCdn\Exceptions\IncorrectAppVersionException;
 
 class LaravelRackspaceCdnServiceProvider extends ServiceProvider {
 
@@ -19,7 +21,18 @@ class LaravelRackspaceCdnServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('braunson/laravel-rackspace-cdn');
+	    $version = new Version();
+
+        if ($version->compare('5.0', '>=')) {
+
+            $this->publishConfig();
+
+        } else {
+
+            // package() removed in Laravel 5.0+
+            $this->package('braunson/laravel-rackspace-cdn');
+
+        }
 	}
 
 	/**
@@ -29,12 +42,13 @@ class LaravelRackspaceCdnServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['open-cloud'] = $this->app->share(function($app)
+        // TODO Change 'open-cloud' to class constant (Contracts\OpenCloud::class) in Laravel 5.2+
+        $this->app->singleton('open-cloud', function ($app)
         {
             return new OpenCloud;
         });
 
-        $this->app['cdn.sync'] = $this->app->share(function($app)
+        $this->app->singleton('cdn.sync', function ($app)
         {
             return new Commands\CdnSyncCommand;
         });
@@ -59,5 +73,32 @@ class LaravelRackspaceCdnServiceProvider extends ServiceProvider {
 	{
 		return array();
 	}
+
+
+    /**
+     * Register config path to be published by the 'artisan vendor:publish' command
+     *
+     * @throws IncorrectAppVersionException
+     * @return void
+     */
+    protected function publishConfig()
+    {
+        $version = new Version();
+
+        if ($version->compare('5.0', '<')){
+            throw new IncorrectAppVersionException();
+        }
+
+        $configPath = __DIR__ . '/../../config/config.php';
+
+        if (function_exists('config_path')) {
+            $publishPath = config_path('laravel-rackspace-cdn.php');
+        } else {
+            $publishPath = base_path('config/laravel-rackspace-cdn.php');
+        }
+
+        $this->publishes([$configPath => $publishPath], 'config');
+
+    }
 
 }

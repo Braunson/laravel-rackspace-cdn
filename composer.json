@@ -12,15 +12,15 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0", 
-        "illuminate/support": "4.x", 
-        "rackspace/php-opencloud": "1.13.*", 
-        "alchemy/zippy": "0.1.0"
+        "php": ">=5.4.0",
+        "illuminate/support": "~4.0 || ~5.0",
+        "rackspace/php-opencloud": "~1.13.0",
+        "alchemy/zippy": "~0.1"
     },
     "autoload": {
         "classmap": [
             "src/migrations"
-        ], 
+        ],
         "psr-0": {
             "Braunson\\LaravelRackspaceCdn": "src/"
         }
@@ -32,8 +32,9 @@
                 "Braunson\\LaravelRackspaceCdn\\LaravelRackspaceCdnServiceProvider"
             ],
             "aliases": {
-                "OpenCloud": "Braunson\\LaravelRackspaceCdn\\Facades\\OpenCloud"
+                "OpenCloud": "Braunson\\LaravelRackspaceCdn\\Facades\\OpenCloud",
+                "Str": "Illuminate\\Support\\Str"
             }
         }
-    } 
+    }
 }

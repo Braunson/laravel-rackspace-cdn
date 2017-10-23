@@ -1,51 +1,31 @@
-**README for Laravel 4.x is [here](./README_L4.md)**
+**README for Laravel 5.x is [here](./README.md)**
 
 # Installation
 
-Run command in your terminal to include this package as a dependency:
-```bash
-composer require braunson/laravel-rackspace-opencloud
+Update your `composer.json` file to include this package as a dependency:
+```json
+"braunson/laravel-rackspace-opencloud": "dev-master"
 ```
 
-Register the OpenCloud service provider and alias the OpenCloud, Str (removed in Laravel 5.0+) facades by adding it to the providers and aliases arrays in the `config/app.php` file.
-
-For Laravel 5.5 and later **don't need** (auto discovery).
-
-For Laravel 5.2 - 5.4:
-
-```php
-'providers' => [
-    Braunson\LaravelRackspaceCdn\LaravelRackspaceCdnServiceProvider::class
-];
-```
-
-```php
-'aliases' => [
-    'OpenCloud' => Braunson\LaravelRackspaceCdn\Facades\OpenCloud::class,
-    'Str' => Illuminate\Support\Str::class,
-]
-```
-
-For Laravel 5.1 and earlier:
-
+Register the OpenCloud service provider by adding it to the providers array in your `app/config/app.php` file.
 ```php
 'providers' => [
     'Braunson\LaravelRackspaceCdn\LaravelRackspaceCdnServiceProvider'
 ]
 ```
 
+Alias the OpenCloud facade by adding it to the aliases array in the `app/config/app.php` file.
 ```php
 'aliases' => [
-    'OpenCloud' => 'Braunson\LaravelRackspaceCdn\Facades\OpenCloud',
-    'Str' => 'Illuminate\Support\Str',
+    'OpenCloud' => 'Braunson\LaravelRackspaceCdn\Facades\OpenCloud'
 ]
 ```
 
 ## Configuration
 
-Copy the config files into your project by running:
+Copy the config file into your project by running
 ```
-php artisan vendor:publish --provider="Braunson\LaravelRackspaceCdn\LaravelRackspaceCdnServiceProvider"
+php artisan config:publish braunson/laravel-rackspace-opencloud
 ```
 
 Edit the config file to include your username, api key, region and url (internal or public).
@@ -64,14 +44,6 @@ php artisan cdn:sync public/assets
 Copies all files to `/assets` trimming 'public' from the path:
 ```
 php artisan cdn:sync public/assets --trim=public
-```
-
-You can configure your `package.json` to do this as NPM task:
-
-```json
-"scripts": {
-    "cdn:sync": "php artisan cdn:sync public/assets --trim=public"
-},
 ```
 
 The sync command will save a file adjacent to the synchronized directory. It contains the http and https urls for your container. Along with a md5 hash of the directory.
@@ -93,16 +65,15 @@ OpenCloud::upload($container, $file, $name = null)
 ```
 
 - `$container` - (string) Name of the container to upload into;
-- `$file` - (string / UploadedFile) Path to file, or instance of `Symfony\Component\HttpFoundation\File\UploadedFile` as returned by `Request::file()`;
+- `$file` - (string / UploadedFile) Path to file, or instance of `Symfony\Component\HttpFoundation\File\UploadedFile` as returned by `Input::file()`;
 - `$name` - (string) Optional file name to be used when saving the file to the CDN.
 
 Example:
 ```php
 Route::post('/upload', function()
-{ 
-    // '\Input' alias was removed from the default aliases in Laravel 5.2+
-    if(Request::hasFile('image')){
-        $file = OpenCloud::upload('my-container', Request::file('image'));
+{
+    if(Input::hasFile('image')){
+        $file = OpenCloud::upload('my-container', Input::file('image'));
     }
 
     $cdnUrl = $file->PublicURL();

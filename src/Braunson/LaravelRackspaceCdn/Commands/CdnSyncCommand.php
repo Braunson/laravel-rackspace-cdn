@@ -2,6 +2,7 @@
 
 use \File;
 use \Str;
+use Braunson\LaravelRackspaceCdn\ConfigExt;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -33,6 +34,19 @@ class CdnSyncCommand extends Command {
 		parent::__construct();
 	}
 
+    /**
+     * Execute the console command (Laravel 5.0+).
+     *
+     * @author Artem Molotov https://github.com/ArtemMolotov
+     * @datetime 12.10.2017 13:10
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        $this->fire();
+    }
+
 	/**
 	 * Execute the console command.
 	 *
@@ -41,7 +55,7 @@ class CdnSyncCommand extends Command {
 	public function fire()
     {
         $opencloud = \App::make('open-cloud');
-        $container_name = \Config::get('laravel-rackspace-cdn::container');
+        $container_name = ConfigExt::getFrom('laravel-rackspace-cdn', 'container');
         $container = $opencloud->getContainer($container_name);
 
         // Get directory or file path
